@@ -10,9 +10,9 @@ const useStore = create((set) => ({
   topRatedMovies: [],
   upcomingMovies: [],
   trailerKey: null,
-  gptSearch: "false",
+  gptSearch: false,
   finalMovieList: [],
-  movieInStore: "false",
+  movieInStore: false,
 
   addUser: (displayName, email, uid) => {
     set({

@@ -1,5 +1,4 @@
-export const LOGO =
-  "https://i.imgur.com/zHwwMdU.png";
+export const LOGO = "https://i.imgur.com/zHwwMdU.png";
 
 export const API_OPTIONS = {
   method: "GET",

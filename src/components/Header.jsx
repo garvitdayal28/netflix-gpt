@@ -7,7 +7,7 @@ import { useStore } from "../utils/appStore";
 import { LOGO } from "../utils/constants";
 
 const Header = () => {
-  const { SignedIn , toggleGptSearch , gptSearch } = useStore();
+  const { SignedIn, toggleGptSearch, gptSearch } = useStore();
 
   const handleSignOut = () => {
     signOut(auth)
@@ -29,11 +29,14 @@ const Header = () => {
       <img className="h-12 mt-4" src={LOGO} alt="CinemaGPT logo" />
 
       <div className="flex items-center gap-4 mt-4 ">
-
-      <div>
-        <button className="bg-gray-900/80 text-white py-1 px-3 rounded-md font-bold border-black/20 border-2 hover:bg-gray-800/80 hover:scale-105 transition-transform duration-300 shadow-md"
-        onClick={handleGptSearchClick}>{gptSearch ? "Home" : "AI Recommendations"}</button>
-      </div>
+        <div>
+          <button
+            className="bg-gray-900/80 text-white py-1 px-3 rounded-md font-bold border-black/20 border-2 hover:bg-gray-800/80 hover:scale-105 transition-transform duration-300 shadow-md"
+            onClick={handleGptSearchClick}
+          >
+            {gptSearch ? "Home" : "AI Recommendations"}
+          </button>
+        </div>
         <Dropdown />
 
         {SignedIn && (
