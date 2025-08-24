@@ -3,7 +3,10 @@ import Body from "./components/Body"
 
 function App() {  
   return (
-    <Body/>
+    <div className="bg-black">
+
+      <Body/>
+    </div>
   );
 }
 

@@ -1,26 +1,54 @@
 import React from "react";
 import Dropdown from "./dropdown/Dropdown";
-import { Link, Links } from "react-router-dom";
+import profilePhoto from "../assets/profilePhoto.svg";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useStore } from "../utils/appStore";
+import { LOGO } from "../utils/constants";
 
 const Header = () => {
+  const { SignedIn , toggleGptSearch , gptSearch } = useStore();
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Auth state change will be handled in Body.jsx
+        // No need to navigate here
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleGptSearchClick = () => {
+    toggleGptSearch();
+  };
+
   return (
-    <div className="absolute flex items-center bg-gradient-to-b from-35% from-black w-full justify-around z-10">
-      <img
-      className="w-44 mt-4"
-        src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production_2025-07-01/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-        alt="logo"
-      />
+    <div className="absolute flex items-center bg-gradient-to-b from-35% from-black w-full justify-around  z-10">
+      <img className="w-44 mt-4" src={LOGO} alt="logo" />
 
-    <div className="flex items-center gap-4 mt-4">
+      <div className="flex items-center gap-4 mt-4 ">
 
-      <Dropdown/>
+      <div>
+        <button className="bg-gray-900/80 text-white py-1 px-3 rounded-md font-bold border-black/20 border-2 hover:bg-gray-800/80 hover:scale-105 transition-transform duration-300 shadow-md"
+        onClick={handleGptSearchClick}>{gptSearch ? "Home" : "GPT Search"}</button>
+      </div>
+        <Dropdown />
 
-      <button className="text-white bg-[#E50914] py-1 px-3 rounded-md font-bold"
-      // onClick={<Link to={/login>}/>}
-      >
-        Sign in</button>
-    </div>
-      
+        {SignedIn && (
+          <div className="flex items-center gap-2">
+            <button
+              className="text-white bg-[#E50914] py-1 px-3 rounded-md font-bold hover:bg-[#E50914]/80 hover:scale-105 transition-transform duration-300 shadow-md"
+              onClick={handleSignOut}
+            >
+              Sign out
+            </button>
+
+            <img className="w-12 rounded-sm" src={profilePhoto} alt="" />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
